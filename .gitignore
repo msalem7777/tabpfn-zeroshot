@@ -1,0 +1,36 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+# Credentials and machine configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Real input data, sources, experiments, and model weights
+upload/
+credit_data/
+credit_originals_DO_NOT_UPLOAD/
+evaluation_only/
+runs/
+outputs/
+.cache/
+*.zip
+*.pdf
+*.pt
+*.pth
+*.ckpt
+research-workspace*.json
+predictions.csv
+*.log
+# Editor/OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

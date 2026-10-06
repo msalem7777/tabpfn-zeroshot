@@ -1,0 +1,15 @@
+{
+  "method": "direct",
+  "worlds": 32,
+  "samples_per_world": 128,
+  "seed": 42,
+  "interval": 0.9,
+  "context_limit": 512,
+  "folds": 3,
+  "device": "auto",
+  "estimators": 1,
+  "model_path": null,
+  "use_all_features": false,
+  "allow_synthetic": true,
+  "assumptions_approved": false
+}

@@ -1,0 +1,96 @@
+{
+  "target": {
+    "name": "yield",
+    "definition": "Fictional process yield",
+    "unit": "units",
+    "population": "Fictional demonstration process",
+    "time_horizon": "same observation",
+    "family": "linear",
+    "positive_class": null
+  },
+  "models": [
+    {
+      "id": "synthetic-1",
+      "title": "Synthetic example \u2014 NOT a published study",
+      "family": "linear",
+      "target": "yield",
+      "target_definition": "Fictional process yield",
+      "target_unit": "units",
+      "source_population": "Fictional demonstration process",
+      "positive_class": null,
+      "predictors": [
+        {
+          "column": "temperature",
+          "meaning": "temperature",
+          "input_unit": "Celsius",
+          "study_unit": "Celsius",
+          "multiplier": 1,
+          "offset": 0,
+          "transform": "identity",
+          "source_center": 0,
+          "source_scale": 1,
+          "category_map": null
+        },
+        {
+          "column": "pressure",
+          "meaning": "pressure",
+          "input_unit": "bar",
+          "study_unit": "bar",
+          "multiplier": 1,
+          "offset": 0,
+          "transform": "identity",
+          "source_center": 0,
+          "source_scale": 1,
+          "category_map": null
+        }
+      ],
+      "coefficients": [
+        20,
+        1.5,
+        4
+      ],
+      "covariance": null,
+      "standard_errors": [
+        1,
+        0.1,
+        0.4
+      ],
+      "independent_coefficients": true,
+      "parameter_distribution": "multivariate_normal",
+      "residual_sd": 3,
+      "residual_log_sd": 0,
+      "target_center": 0,
+      "target_scale": 1,
+      "target_transform": "identity",
+      "transfer_intercept_sd": 0,
+      "weight": 1,
+      "weight_reason": "Only fictional candidate",
+      "uncertainty_basis": "Demo normal parameter distribution; not inferred from research",
+      "assumptions": [
+        "Independent normal coefficients",
+        "Gaussian residuals with fixed SD 3",
+        "No source-to-target shift",
+        "Uploaded and source units coincide"
+      ],
+      "anchors": [
+        {
+          "source_id": "fc80decf835e47dc",
+          "quote": "Fictional demonstration: yield = 20 + 1.5 * temperature + 4 * pressure. Residual SD is 3. Coefficient SEs are 1, 0.1, 0.4.",
+          "supports": "Entire fictional model"
+        }
+      ],
+      "reviewed": false,
+      "synthetic": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "fc80decf835e47dc",
+      "title": "Synthetic example \u2014 NOT a published study",
+      "text": "Fictional demonstration: yield = 20 + 1.5 * temperature + 4 * pressure. Residual SD is 3. Coefficient SEs are 1, 0.1, 0.4.",
+      "url": "",
+      "kind": "synthetic",
+      "sha256": "fc80decf835e47dcea3e208e0631b1d220ef319ea872054dd2d03f155de2f9c3"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+/* Exact dark palette from the Prior Labs football page; local layout preserved. */
+:root {
+  --bg:#090a14; --panel:#15171f; --card:#1c1e28; --line:#ffffff14;
+  --text:#e8e8ed; --muted:#8b8d9e; --teal:#8078c8; --purple:#6db5c4;
+  --amber:#c9a44e; --accent-hover:#9490d6; --success:#5dba96;
+}
+body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+header { background:#090a14; height:88px; }
+button,.button { color:#fff; border-radius:9px; }
+button:hover,.button:hover { filter:none; background:var(--accent-hover); }
+button.secondary,.button.secondary { background:#8078c81f; border-color:#8c82dc38; color:#cdc7ee; }
+button.secondary:hover,.button.secondary:hover { background:#8078c82e; }
+button.quiet:hover,button.close:hover { background:#1c1e28; color:var(--text); }
+.brand { gap:10px; }
+.brand a { color:var(--text); font-size:21px; font-weight:600; text-decoration:none; }
+.brand-mascot { width:64px; height:72px; display:block; flex-shrink:0; }
+.layout { min-height:calc(100vh - 128px); }
+.sidebar,.helper { background:#0e1019; }
+.helper { max-height:calc(100vh - 128px); }
+.helper-mascot { display:flex; justify-content:center; flex-shrink:0; margin:-8px 0 10px; }
+.helper-mascot canvas { width:150px; height:180px; }
+.helper-title { padding-bottom:16px; }
+.nav.active { background:#8078c81f; border-color:#8c82dc38; color:#cdc7ee; }
+.nav.active span,.eyebrow,.small-label { color:#b4ace4; }
+.nav span { color:#8b8d9e; }
+.pill.good { color:var(--success); border-color:#5dba9650; }
+.pill.warn { color:var(--amber); border-color:#c9a44e50; }
+input,select,textarea { background:#121420; border-color:#ffffff21; }
+input:focus,select:focus,textarea:focus { border-color:#8078c8; box-shadow:0 0 0 3px #8078c82e; }
+.card,.model-card,.metric,dialog { border-radius:12px; }
+.callout { background:#c9a44e1a; border-color:#c9a44e; color:#e8dfc6; }
+.bubble.assistant { background:#1c1e28; color:#e8e8ed; }
+.bubble.user { background:#8078c81f; color:#e2def5; }
+#chatForm button { background:#8078c8; color:#fff; }
+#chatForm button:hover { background:#9490d6; }
+footer { background:#0e1019; }
+#notice { background:#5dba961a; border-color:#5dba9650; }
+#notice.error,.dialog-error { background:#c96b731a; border-color:#c96b7350; color:#f3c5ca!important; }
+dialog { border-color:#ffffff21; }
+dialog::backdrop { background:#090a14bb; }
+a,.text-link { color:#b4ace4; }
+.model-card.approved { border-color:#5dba9660; }
+.model-card ul { color:#e8e8ed; }
+.model-card blockquote { border-color:#8078c8; }
+.danger { color:#c96b73!important; }
+.graph path,.graph line { stroke:#8078c880; }
+.graph rect { fill:#1c1e28; stroke:#8c82dc60; }
+#resultTable tr[data-row]:hover { background:#8078c81f; }
+@media(max-width:1180px) {
+  .helper { max-height:650px; }
+  .helper-mascot canvas { width:100px; height:120px; }
+}
+@media(max-width:720px) {
+  header { height:auto; align-items:center; padding:10px 12px; }
+  .brand { gap:5px; }
+  .brand-mascot { width:44px; height:54px; }
+  .brand a { font-size:17px; }
+  .header-right { max-width:55%; }
+  .helper-mascot canvas { width:100px; height:120px; }
+}
+
+/* Source approval has two controls, with optional details below each title. */
+.source-row {grid-template-columns:minmax(0,1fr) auto;}
+.source-row > div:last-child {display:flex;gap:8px;flex-wrap:wrap;align-items:start;}
+@media(max-width:700px){.source-row {grid-template-columns:1fr;}}
+
+.zs-mark { display:inline-grid; place-items:center; width:52px; height:52px; border-radius:14px; background:#bdf26b; color:#090a14; font:700 20px system-ui; }
