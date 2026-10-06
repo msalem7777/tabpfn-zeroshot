@@ -1,17 +1,28 @@
-# ZeroShot: literature-informed context for TabPFN
+# ZeroShot: agent-assisted transfer learning for TabPFN
 
-A research prototype for tabular prediction with **zero observed target labels in the supplied context**. An LLM extracts or proposes simple equations, Monte Carlo sampling turns those equations into alternative labeled context datasets, and a frozen TabPFN predicts test rows from each context. The final prediction mixes the TabPFN outputs.
+A general-purpose transfer-learning framework for TabPFN, designed for tabular prediction with **zero observed target labels in the supplied context**. LLM agents search the literature, extract coefficients and their reported uncertainties, and propose candidate models. Monte Carlo sampling—repeatedly drawing plausible model parameters—turns those models into alternative labeled context datasets. TabPFN uses each dataset as examples for predicting test rows, without retraining or changing its pretrained weights. The final prediction combines the resulting TabPFN predictive distributions.
 
-**Status:** experimental. This is a proposal for transferring external knowledge through synthetic labels, not a demonstrated solution to unrestricted zero-shot learning or a validated credit-decision system. It is independent of Prior Labs.
+**Status:** experimental. The framework transfers external knowledge through generated labels and is intended for use across application domains. The current implementation supports regression (numeric outcomes) and binary classification (two possible outcomes), using linear or logistic label-generating models. Generalization across domains and uncertainty calibration—whether stated uncertainty agrees with observed errors—remain to be evaluated. Credit default is an initial testing example, not the framework's scope. This project is independent of Prior Labs.
 
 ## What happens
 
-1. Supply context covariates, test covariates, and a target description; connect your chosen supported LLM endpoint with your own token.
-2. Let the assistant retrieve sources or upload papers. Sources can be approved/rejected without a written justification; optional manual controls remain available.
-3. Extract usable published equations or delegate proposal of linear/logistic models. Published numerical evidence, LLM-proposed assumptions, and user-specified models have different provenance. If no eligible sources exist, proposals are explicitly **unsourced LLM priors**.
-4. Sample model choices and uncertain parameters, generate context labels, and run TabPFN. Repeat and aggregate predictive distributions.
+1. Supply context covariates (input columns used to generate example labels), test covariates (rows to predict), and a target description. Connect a supported LLM provider with your own API token.
+2. Delegate literature discovery, equation extraction, model proposal, and review to the agents described below. Uploaded papers and user-specified models are also supported.
+3. Review the selected sources and candidate models. Published numerical estimates, agent-proposed assumptions, and user-specified values are recorded separately. When no eligible sources are available, proposals are explicitly labeled **unsourced LLM priors**: model assumptions supplied by the LLM without supporting source evidence.
+4. Sample model choices and uncertain parameters, generate context labels, and run TabPFN. Repeat and combine its predictive distributions—the possible outcomes and their assigned probabilities.
 
-The default delegated workflow uses bounded researcher/extractor/proposer/reviewer prompts through the same connected LLM. These are workflow roles, not independent experts. A second prompt and structural validation cannot establish scientific correctness.
+## Agent workflow
+
+An agent here is an LLM assigned a specific task within a controlled workflow. The current implementation runs the following roles sequentially through the same connected LLM:
+
+| Role | Responsibility |
+| --- | --- |
+| Researcher | Discover relevant papers when no sources have been supplied, reuse saved papers, and screen sources against the task's restrictions. |
+| Extractor | Recover usable published equations, coefficients, reported uncertainties, variable definitions, and required transformations. |
+| Model proposer | Propose candidate linear/logistic models when extraction is insufficient or the user requests custom models. Explicitly label proposed numbers as assumptions. |
+| Reviewer | Critique proposed models for consistency and suitability, and provide feedback for a bounded revision step. |
+
+The backend then checks the model format and compatibility with the supplied columns before generating labels. The agents automate research and model construction; using the same LLM in several roles does not provide independent scientific verification. Exact user-specified models remain supported alongside the delegated workflow.
 
 ## Statistical idea
 
@@ -52,7 +63,7 @@ See [the statistical specification](docs/STATISTICS.md) for parameter distributi
 - **Bayesian-inspired, not an exact posterior.** The chosen parameter distributions and TabPFN's learned prior need not form one coherent generative model. Uncertainty can be misspecified, altered, or double-counted. Calibration and transportability require empirical evaluation.
 - **Auditable but not deterministic forever.** Exports include assumptions, sources, sampled parameters/context labels, configuration, hashes, and versions. Provider responses and broad dependency ranges can change. The LLM receives dataset summaries and source excerpts, not individual context rows; summaries may still reveal sensitive information. Tokens are excluded from workspace exports.
 
-## Initial credit experiment
+## Example evaluation: credit default
 
 One exploratory Taiwan credit run used 512 context rows, 256 test rows, 23 predictors, and 32 Monte Carlo worlds. Its three logistic generators used **LLM-proposed numbers**, not complete published fitted equations.
 
@@ -77,7 +88,7 @@ py -3 -m venv .venv
 
 Open http://127.0.0.1:7432. Connect an LLM, load covariates and target metadata, build/review models, and run the literature-context-to-TabPFN path. TabPFN weights may require download/access under the upstream model terms. LLM availability and cost depend on your provider. Save a full workspace before restarting; sessions are in memory and expire after eight hours. Workspace exports exclude raw dataset rows, which must be reloaded.
 
-[Credit data walkthrough](docs/CREDIT_EXAMPLE.md) · [GitHub publishing instructions](PUBLISH_TO_GITHUB.md)
+[Credit data walkthrough](docs/CREDIT_EXAMPLE.md)
 
 Offline tests (no paid inference):
 
@@ -85,7 +96,7 @@ Offline tests (no paid inference):
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Core code: `engine.py` (worlds/aggregation), `tabpfn_adapter.py` (frozen predictor), `model_agents.py` (delegation), `schema.py` (contracts), `marginalization.py` (missing predictors), and `web.py` (local UI), under `zeroshot/`. Synthetic fixtures are included; user papers, real datasets, credentials, weights, and saved runs are excluded. Legacy direct-equation modes remain for diagnostics/demo only.
+Core code under `zeroshot/`: `engine.py` (sampling and combining predictions), `tabpfn_adapter.py` (TabPFN prediction without weight updates), `model_agents.py` (agent coordination), `research.py` and `retrieval.py` (literature discovery and extraction), `schema.py` (required data/model formats), `marginalization.py` (integrating over missing predictors), and `web.py` (local UI). Synthetic fixtures are included; user papers, real datasets, credentials, weights, and saved runs are excluded. Legacy direct-equation modes remain for diagnostics/demo only.
 
 ## Attribution and licensing
 
