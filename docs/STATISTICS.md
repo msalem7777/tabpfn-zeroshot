@@ -9,9 +9,9 @@ Inputs are context covariates $X_C$, test covariates $X_T$, a target definition,
 Conceptually, for a label-generating distribution $\pi$:
 
 $$
-q_{\mathrm{mix}}(y_*\mid x_*,X_C,E)
-=\int q_{\mathrm{PFN}}(y_*\mid x_*,X_C,\tilde y_C)
-\,p(d\tilde y_C\mid X_C,J,\theta)\,\pi(dJ,d\theta\mid E).
+q_{\mathrm{mix}}(y_{\ast}\mid x_{\ast},X_C,E)
+=\int q_{\mathrm{PFN}}(y_{\ast}\mid x_{\ast},X_C,\tilde{y}_C)
+\,p(d\tilde{y}_C\mid X_C,J,\theta)\,\pi(dJ,d\theta\mid E).
 $$
 
 Monte Carlo approximates this integral. Writing $\pi(\cdot\mid E)$ does not imply a posterior inferred by Bayes' rule: it may be a distribution elicited from an LLM or manually declared. Regression mean-label mode replaces the outcome distribution with a point mass at each sampled equation's mean.
@@ -66,7 +66,7 @@ Unsupported context rows are excluded from label generation. The primary path re
 Each world yields a predictive distribution $q_m$. The estimator is $\hat q=M^{-1}\sum_m q_m$. Let its component mean/variance be $\mu_m,v_m$. By the law of total variance:
 
 $$
-\operatorname{Var}_{\hat q}(Y)=\frac1M\sum_m v_m+\frac1M\sum_m(\mu_m-\bar\mu)^2.
+\mathrm{Var}_{\hat{q}}(Y)=\frac{1}{M}\sum_m v_m+\frac{1}{M}\sum_m(\mu_m-\bar\mu)^2.
 $$
 
 The second term uses denominator $M$ because this is the variance of the finite mixture. Do not divide the predictive variance by $M$ to report outcome uncertainty. Under suitable independent sampling, Monte Carlo error in a mean decreases approximately as $M^{-1/2}$; that is numerical precision, not narrower uncertainty about an individual's outcome.
