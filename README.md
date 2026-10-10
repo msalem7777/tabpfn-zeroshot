@@ -46,7 +46,7 @@ TabPFN runs locally. Its model weights may require a first-use download, authent
 
 ![ZeroShot input screen with context and test dataset uploads and target-definition fields](media/ui-screenshot-input.png)
 
-*Dataset & target: upload the columns you have and describe the outcome you want to predict. Screenshots show the development interface; the repository version uses a plain ZS mark in place of the mascot.*
+*Dataset & target: upload the columns you have and describe the outcome you want to predict.*
 
 In **Dataset & target**:
 
@@ -192,4 +192,4 @@ See [the statistical specification](docs/STATISTICS.md) for parameter distributi
 
 ## Attribution and licensing
 
-Built around the separately distributed [TabPFN](https://github.com/PriorLabs/TabPFN) package. Dataset attribution is in the credit walkthrough. No project license has been selected yet; this repository does not grant a new license to third-party software or weights. The publication copy uses a plain ZS mark; the borrowed Prior Labs mascot is omitted. See [asset notes](THIRD_PARTY_ASSETS.md).
+Built around the separately distributed [TabPFN](https://github.com/PriorLabs/TabPFN) package. Dataset attribution is in the credit walkthrough. No project license has been selected yet; this repository does not grant a new license to third-party software or weights. The interface includes the animated Tabby mascot adapted from Prior Labs, with the football removed. See [asset notes](THIRD_PARTY_ASSETS.md).

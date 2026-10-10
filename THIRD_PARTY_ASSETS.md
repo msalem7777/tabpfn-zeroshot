@@ -1,7 +1,17 @@
-# Publication-copy asset notes
+# Tabby mascot source
 
-The working prototype previously included a procedural Tabby mascot adapted from Prior Labs' football page. Its retrieved source had no documented redistribution license. This publication copy omits that artwork, animation code, source manifest and mascot-only test; two plain ZS text marks replace it. The existing local working app was not changed.
+Tabby artwork, palette, sprite construction are adapted from Prior Labs:
 
-The dark palette was inspired by https://platform.priorlabs.ai/football; system fonts are used. No proprietary font is bundled. The project is independent of Prior Labs and does not claim ownership of their brand or assets.
+- Reference: https://platform.priorlabs.ai/football
+- Standalone source: https://platform.priorlabs.ai/tabby-football.html
+- Retrieved: 2026-10-05
 
-TabPFN and other dependencies are installed separately and retain their own licenses and model terms. No license has yet been selected for this project's original code. No user PDFs, real datasets, saved research workspaces, model weights or inference exports are included. Synthetic fixtures remain for offline tests and demonstration.
+This is the actual procedural canvas artwork served by that page, not an AI-generated recreation or a crop of the screenshot. The upstream response did not include a license grant; no ownership or permission to sublicense the Prior Labs artwork is claimed here. ZeroShot remains a separate project.
+
+The football-only component has been removed. The compact mascot omits the ball overlay; the original robot artwork already contains both complete feet underneath it. No image patch or invented body part is needed.
+
+`zeroshot/static/mascot.js` reuses the original palette, pixel-art construction and idle, blink, windup, kick, celebration and dizzy poses. Its compact logo layout/controller is new integration code: the mascot floats and blinks; clicking or pressing Enter/Space cycles kick, celebration and dizzy animations. Both logo instances share a 24-frame-per-second scheduler that pauses when the tab is hidden. Reduced-motion preferences display the original idle pose without animation.
+
+`zeroshot/static/prior-theme.css` applies the reference dark palette: background `#090a14`, panels `#15171f`, primary `#8078c8`, text `#e8e8ed`, muted text `#8b8d9e`, borders `#ffffff14`, and cyan chart accent `#6db5c4`. The reference's proprietary font is not bundled; system fonts are used.
+
+All mascot code is served locally. It performs no external requests and sends no dataset data or credentials. The reference-page source hash and URLs are recorded in `tabby-source.json`.

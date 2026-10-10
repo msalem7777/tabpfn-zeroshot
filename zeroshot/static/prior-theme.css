@@ -14,6 +14,8 @@ button.quiet:hover,button.close:hover { background:#1c1e28; color:var(--text); }
 .brand { gap:10px; }
 .brand a { color:var(--text); font-size:21px; font-weight:600; text-decoration:none; }
 .brand-mascot { width:64px; height:72px; display:block; flex-shrink:0; }
+canvas[data-tabby] { image-rendering:pixelated; cursor:pointer; border-radius:8px; }
+canvas[data-tabby]:focus-visible { outline:2px solid var(--teal); outline-offset:3px; }
 .layout { min-height:calc(100vh - 128px); }
 .sidebar,.helper { background:#0e1019; }
 .helper { max-height:calc(100vh - 128px); }
@@ -63,5 +65,3 @@ a,.text-link { color:#b4ace4; }
 .source-row {grid-template-columns:minmax(0,1fr) auto;}
 .source-row > div:last-child {display:flex;gap:8px;flex-wrap:wrap;align-items:start;}
 @media(max-width:700px){.source-row {grid-template-columns:1fr;}}
-
-.zs-mark { display:inline-grid; place-items:center; width:52px; height:52px; border-radius:14px; background:#bdf26b; color:#090a14; font:700 20px system-ui; }
