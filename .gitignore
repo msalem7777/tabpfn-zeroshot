@@ -34,3 +34,5 @@ predictions.csv
 .idea/
 .DS_Store
 Thumbs.db
+
+.venv-github/
